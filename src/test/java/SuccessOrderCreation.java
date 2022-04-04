@@ -50,4 +50,16 @@ public class SuccessOrderCreation {
         assertThat("Order cannot created", track_id, is(notNullValue()));
 
     }
+    
+    @DisplayName("Check status code of /api/v1/orders - success Creating Order Test with none color")
+    @Test
+    public void successCreatingOrderTestWhitTwoColor() throws JsonProcessingException {
+        var list = new ArrayList<String>();
+        list.add("BLACK, GREY");
+        Order order = OrderGenerator.getRandomOrder();
+        ValidatableResponse createResponse = orderClient.create(order);
+        var track_id = createResponse.statusCode(201).extract().body();
+        assertThat("Order cannot created", track_id, is(notNullValue()));
+
+    }
 }
