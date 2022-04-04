@@ -6,20 +6,42 @@ import org.junit.Test;
 import ru.praktikum.Order;
 import ru.praktikum.OrderClient;
 import ru.praktikum.OrderGenerator;
-import java.util.ArrayList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import io.qameta.allure.junit4.DisplayName;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import java.util.List;
+import java.util.ArrayList;
 
 
+@RunWith(Parameterized.class)
 public class SuccessOrderCreation {
+
+    private Order order;
     OrderClient orderClient;
     int track_id;
+    private final List<String> scooterColors;
+
+    public  SuccessOrderCreation(String scooterColors) {
+        this.scooterColors = List.of(scooterColors);
+    }
+
+    @Parameterized.Parameters
+    public static Object[][] getColors() {
+        return new Object[][]{
+                {"\"BLACK\", \"GREY\""},
+                {"\"GREY\""},
+                {"\"BLACK\""},
+                {""},
+        };
+    }
 
     @Before
     public void setUp() {
         orderClient = new OrderClient();
+        order = new Order(scooterColors);
     }
 
     @After
@@ -27,39 +49,13 @@ public class SuccessOrderCreation {
         orderClient.cancel(track_id);
     }
 
-    @DisplayName("Check status code of /api/v1/orders - success Creating Order Test with one color")
+    @DisplayName("Check status code of /api/v1/orders - success Creating Order Test with different color")
     @Test
     public void successCreatingOrderTest() throws JsonProcessingException {
-        var list = new ArrayList<String>();
-        list.add("GREY");
+
         Order order = OrderGenerator.getRandomOrder();
         ValidatableResponse createResponse = orderClient.create(order);
         var track_id = createResponse.statusCode(201).extract().body();
         assertThat("Order cannot created", track_id, is(notNullValue()));
-
-    }
-
-    @DisplayName("Check status code of /api/v1/orders - success Creating Order Test with none color")
-    @Test
-    public void successCreatingOrderTestWhitoutColor() throws JsonProcessingException {
-        var list = new ArrayList<String>();
-        list.add(" ");
-        Order order = OrderGenerator.getRandomOrder();
-        ValidatableResponse createResponse = orderClient.create(order);
-        var track_id = createResponse.statusCode(201).extract().body();
-        assertThat("Order cannot created", track_id, is(notNullValue()));
-
-    }
-    
-    @DisplayName("Check status code of /api/v1/orders - success Creating Order Test with two color")
-    @Test
-    public void successCreatingOrderTestWhitTwoColor() throws JsonProcessingException {
-        var list = new ArrayList<String>();
-        list.add("BLACK, GREY");
-        Order order = OrderGenerator.getRandomOrder();
-        ValidatableResponse createResponse = orderClient.create(order);
-        var track_id = createResponse.statusCode(201).extract().body();
-        assertThat("Order cannot created", track_id, is(notNullValue()));
-
-    }
 }
+    }
