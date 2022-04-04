@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
+import java.util.List;
 import java.util.ArrayList;
 
 @JsonPropertyOrder({ "firstname", "lastName", "address", "metroStation", "phone", "phone", "rentTime", "deliveryDate", "comment", "color"})
@@ -19,6 +19,7 @@ public class Order {
     public static String deliveryDate;
     public static String comment;
     public static ArrayList<String> color;
+    private List<String> collor;
 
 
     @JsonCreator
@@ -93,6 +94,8 @@ public class Order {
         return color;
     }
 
+    public Order(List<String> collor) {
+        this.collor = collor;
+    }
+
 }
-
-
