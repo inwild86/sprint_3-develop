@@ -51,7 +51,7 @@ public class SuccessOrderCreation {
 
     }
     
-    @DisplayName("Check status code of /api/v1/orders - success Creating Order Test with none color")
+    @DisplayName("Check status code of /api/v1/orders - success Creating Order Test with two color")
     @Test
     public void successCreatingOrderTestWhitTwoColor() throws JsonProcessingException {
         var list = new ArrayList<String>();
