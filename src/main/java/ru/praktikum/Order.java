@@ -45,10 +45,6 @@ public class Order {
 
     }
 
-//    public Order(String firstname, String lastName, String address, String metroStation, String phone, int rentTime, String deliveryDate, String comment, ArrayList<String> color) {
-//
-//    }
-
     @JsonGetter("firstname")
     public static String getFirstname() {
         return firstname;
