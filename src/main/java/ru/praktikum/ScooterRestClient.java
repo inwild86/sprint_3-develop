@@ -11,7 +11,7 @@ public class ScooterRestClient {
 
     protected static RequestSpecification getBaseSpec() {
         return new RequestSpecBuilder()
-                .setContentType(JSON) // тип данных в body
+                .setContentType(JSON) 
                 .setBaseUri(BASE_URL)
                 .build();
 
