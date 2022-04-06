@@ -11,6 +11,5 @@ public class GettingListOfOrders {
         ValidatableResponse listOfOrdersByCourierId = OrderList.getOrdersList();
         listOfOrdersByCourierId.statusCode(200);
     }
-
 }
 

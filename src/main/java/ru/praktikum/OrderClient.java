@@ -9,14 +9,12 @@ import java.util.ArrayList;
 
 import static io.restassured.RestAssured.given;
 
-public class OrderClient extends ScooterRestClient{
+public class OrderClient extends ScooterRestClient {
     private static final String ORDER_PATH = "/api/v1/orders";
 
     @Step("Create an order")
     public ValidatableResponse create(Order order) throws JsonProcessingException {
-
         String result = new ObjectMapper().writeValueAsString(order);
-
         return given()
                 .spec(getBaseSpec())
                 .header("Content-type", "application/json")
@@ -37,5 +35,4 @@ public class OrderClient extends ScooterRestClient{
                 .put(ORDER_PATH + "/cancel" + track_id)
                 .then();
     }
-
 }

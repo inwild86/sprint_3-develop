@@ -5,50 +5,48 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({ "login", "password", "firstname"})
+@JsonPropertyOrder({"login", "password", "firstname"})
 public class Courier {
 
     public static String login;
     public static String password;
     public static String firstname;
 
-@JsonCreator
+    @JsonCreator
     public Courier
-        (@JsonProperty("login") String login) {
+            (@JsonProperty("login") String login) {
         this.login = login;
-
     }
 
-@JsonCreator
+    @JsonCreator
     public Courier(
-        @JsonProperty("login") String login,
-        @JsonProperty("password") String password) {
-            this.login = login;
-            this.password = password;
-
+            @JsonProperty("login") String login,
+            @JsonProperty("password") String password) {
+        this.login = login;
+        this.password = password;
     }
 
-@JsonCreator
+    @JsonCreator
     public Courier(
-        @JsonProperty("login") String login,
-        @JsonProperty("password") String password,
-        @JsonProperty("firstname") String firstname) {
+            @JsonProperty("login") String login,
+            @JsonProperty("password") String password,
+            @JsonProperty("firstname") String firstname) {
         this.login = login;
         this.password = password;
         this.firstname = firstname;
     }
 
-@JsonGetter("login")
+    @JsonGetter("login")
     public String getLogin() {
         return login;
     }
 
-@JsonGetter("password")
+    @JsonGetter("password")
     public String getPassword() {
         return password;
     }
 
-@JsonGetter("firstname")
+    @JsonGetter("firstname")
     public String getFirstname() {
         return firstname;
     }

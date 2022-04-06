@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class OrderGenerator {
 
-    @Step("Generating order")
+    @Step("Generating random order")
     public static Order getRandomOrder() {
         String orderFirstname = RandomStringUtils.randomAlphabetic(9);
         String orderLstName = RandomStringUtils.randomAlphabetic(9);
@@ -20,16 +20,12 @@ public class OrderGenerator {
         String orderComment = RandomStringUtils.randomAlphabetic(9);
         ArrayList<String> color = new ArrayList<String>();
         color.add("GRAY");
-
         Allure.addAttachment("orderFirstname", orderFirstname);
         Allure.addAttachment("orderLstName", orderLstName);
         Allure.addAttachment("orderAddress", orderAddress);
         Allure.addAttachment("orderMetroStation", orderMetroStation);
         Allure.addAttachment("orderPhone", orderPhone);
         Allure.addAttachment("orderComment", orderComment);
-
         return new Order(orderFirstname, orderLstName, orderAddress, orderMetroStation, orderPhone, orderRentTime, orderDeliveryDate, orderComment, color);
-
     }
-
 }

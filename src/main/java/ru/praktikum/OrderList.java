@@ -7,9 +7,8 @@ import java.util.ArrayList;
 
 import static io.restassured.RestAssured.given;
 
-public class OrderList extends ScooterRestClient{
+public class OrderList extends ScooterRestClient {
     private static final String ORDERLIST_PATH = "/v1/orders";
-
     public static Integer courierId;
     public static String nearestStation;
     public static String limit;
@@ -56,7 +55,7 @@ public class OrderList extends ScooterRestClient{
 
     @Step("Get list of orders by courierId")
     public static ValidatableResponse getOrdersList() {
-        return   given()
+        return given()
                 .spec(getBaseSpec())
                 .header("Content-type", "application/json")
                 .queryParam("courierId", 1)
@@ -65,6 +64,4 @@ public class OrderList extends ScooterRestClient{
                 .get(ORDERLIST_PATH)
                 .then().statusCode(200);
     }
-
-
 }

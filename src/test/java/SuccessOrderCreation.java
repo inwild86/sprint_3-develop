@@ -13,8 +13,6 @@ import io.qameta.allure.junit4.DisplayName;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import java.util.List;
-import java.util.ArrayList;
-
 
 @RunWith(Parameterized.class)
 public class SuccessOrderCreation {
@@ -24,11 +22,11 @@ public class SuccessOrderCreation {
     int track_id;
     private final List<String> scooterColors;
 
-    public  SuccessOrderCreation(String scooterColors) {
+    public SuccessOrderCreation(String scooterColors) {
         this.scooterColors = List.of(scooterColors);
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters( name = "{index}: Color ({0})" )
     public static Object[][] getColors() {
         return new Object[][]{
                 {"\"BLACK\", \"GREY\""},
@@ -45,17 +43,19 @@ public class SuccessOrderCreation {
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         orderClient.cancel(track_id);
     }
 
     @DisplayName("Check status code of /api/v1/orders - success Creating Order Test with different color")
     @Test
     public void successCreatingOrderTest() throws JsonProcessingException {
-
         Order order = OrderGenerator.getRandomOrder();
         ValidatableResponse createResponse = orderClient.create(order);
         var track_id = createResponse.statusCode(201).extract().body();
         assertThat("Order cannot created", track_id, is(notNullValue()));
-}
     }
+}
+
+
+
